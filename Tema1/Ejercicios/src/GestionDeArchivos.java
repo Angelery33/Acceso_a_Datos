@@ -64,4 +64,29 @@ public class GestionDeArchivos {
             System.out.println("El archivo o directorio no existe.");
         }
     }
+    public void verContenidoHex(String directorio, String archivo) {
+        File f = new File(directorio, archivo);
+
+        if (f.exists() && f.isFile()) {
+            try (InputStream is = new FileInputStream(f)) {
+                int byteRead;
+                int count = 0;
+                System.out.println("Contenido de " + archivo + " en hexadecimal:");
+
+                while ((byteRead = is.read()) != -1) {
+                    System.out.printf("%02X ", byteRead);
+                    count++;
+
+                    if (count % 16 == 0) {
+                        System.out.println();
+                    }
+                }
+                System.out.println()
+            } catch (IOException e) {
+                System.out.println("Error al leer el archivo binario: " + e.getMessage());
+            }
+        } else {
+            System.out.println("El archivo no existe o no es un archivo válido.");
+        }
+    }
 }
