@@ -81,7 +81,7 @@ public class GestionDeArchivos {
                         System.out.println();
                     }
                 }
-                System.out.println()
+                System.out.println();
             } catch (IOException e) {
                 System.out.println("Error al leer el archivo binario: " + e.getMessage());
             }
