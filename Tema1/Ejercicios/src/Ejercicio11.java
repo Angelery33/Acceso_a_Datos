@@ -43,9 +43,8 @@ public class Ejercicio11 {
 
     public static void main(String[] args) {
         Ejercicio11 x = new Ejercicio11();
-        x.concat("C:\\Users\\angel\\Desktop\\Clase\\AccesoDatos\\Acceso_a_Datos\\Tema1\\Ejercicios\\src\\prueba.txt", "C" +
-                ":\\Users\\angel\\Desktop\\Clase\\AccesoDatos\\Acceso_a_Datos\\Tema1\\Ejercicios\\src" +
-                "\\prueba1.txt", "archivoFinal1.txt");
+        x.concat("C:\\Users\\angel\\Desktop\\Clase\\Acceso_a_Datos\\Tema1\\Ejercicios\\src\\prueba.txt", "C" +
+                ":\\Users\\angel\\Desktop\\Clase\\AccesoDatos\\Acceso_a_Datos\\Tema1\\Ejercicios\\src\\prueba1.txt", "archivoFinal1.txt");
 
     }
 }
