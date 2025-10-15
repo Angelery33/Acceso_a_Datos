@@ -27,7 +27,6 @@ public class CalculadoraPrimo {
         File file = new File(FILENAME);
 
         // Si el archivo no existe, simplemente retornamos 2.
-        // La lógica de informar esto al usuario se hará en el Controlador/Vista.
         if (!file.exists()) {
             return 2;
         }
