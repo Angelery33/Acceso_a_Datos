@@ -30,7 +30,8 @@ public class MainPrimos {
             // Si el número actual es 2, el siguiente es 3. Para el resto, salta los números pares.
             if (startNumber == 2) {
                 startNumber++;
-            } else {
+            }
+            else {
                 startNumber += 2; // Incrementa en 2 para verificar solo números impares después del 2
             }
         }

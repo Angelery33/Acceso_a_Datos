@@ -8,16 +8,11 @@ import java.io.IOException;
 import java.io.File;
 
 /**
- * Clase que contiene la lógica para calcular números primos y gestionar su persistencia.
- * Se encarga de determinar el número de inicio para el cálculo, verificar la primalidad
- * de un número y almacenar los primos encontrados en un archivo.
- * Lanza excepciones para que sean manejadas por capas superiores (ej. el Controlador).
+ * Clase que contiene la lógica para calcular números primos y gestionarlos
  */
 public class CalculadoraPrimo {
 
     private static final String FILENAME = "primos.txt"; // Nombre del archivo para almacenar los primos
-
-    public CalculadoraPrimo(){} // Constructor vacío, si es necesario
 
     /**
      * Determina el número desde el cual el programa debe empezar a buscar primos.
@@ -38,10 +33,8 @@ public class CalculadoraPrimo {
         }
 
         String lastLine = "";
-        long lastPrime = 0; // Inicializar lastPrime
+        long lastPrime = 0;
 
-        // El bloque try-with-resources asegura que el BufferedReader se cierre automáticamente.
-        // Las excepciones IOException y NumberFormatException se propagarán si ocurren.
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String currentLine;
             while ((currentLine = reader.readLine()) != null) {
@@ -57,7 +50,6 @@ public class CalculadoraPrimo {
         // Si hay un IOException al abrir o leer el archivo, se lanzará desde aquí.
 
         // Después de intentar leer el archivo, determina el siguiente número.
-        // Esta lógica debe estar completamente dentro del método.
         if (lastPrime > 0) {
             // Si el último primo fue 2, el siguiente número a probar es 3.
             // De lo contrario, saltamos al siguiente impar para continuar la búsqueda.

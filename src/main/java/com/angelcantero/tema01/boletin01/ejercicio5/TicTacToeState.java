@@ -9,10 +9,10 @@ import java.util.Arrays;
  */
 public class TicTacToeState implements Serializable {
 
-    private char[][] board; // Tablero: 'X', 'O' o ' ' (vacío)
-    private char currentPlayer; // Jugador actual: 'X' o 'O'
-    private int xWins; // Número de partidas ganadas por X
-    private int oWins; // Número de partidas ganadas por O
+    private char[][] board;
+    private char currentPlayer;
+    private int xWins;
+    private int oWins;
 
     /**
      * Constructor que inicializa un tablero vacío y turno de X.
@@ -91,13 +91,12 @@ class GameStorage {
      * @param state    estado de la partida a guardar
      * @param filename ruta del archivo donde se guardará el estado
      */
-    public static void saveGame(TicTacToeState state, String filename) {
+    public static void saveGame(TicTacToeState state, String filename) throws IOException {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
             out.writeObject(state);
-            System.out.println("Partida guardada en " + filename);
-        } catch (IOException e) {
-            e.printStackTrace();
+
         }
+
     }
 
     /**
@@ -106,15 +105,12 @@ class GameStorage {
      * @param filename ruta del archivo desde donde se cargará el estado
      * @return el estado de la partida, o null si ocurre un error
      */
-    public static TicTacToeState loadGame(String filename) {
+    public static TicTacToeState loadGame(String filename) throws IOException, ClassNotFoundException {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename))) {
             TicTacToeState state = (TicTacToeState) in.readObject();
-            System.out.println("Partida cargada desde " + filename);
             return state;
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
         }
+
     }
 }
 
@@ -135,11 +131,24 @@ class Main {
         System.out.println(state);
 
         // Guardar partida
-        GameStorage.saveGame(state, "tictactoe");
+        try{
+            GameStorage.saveGame(state, "tictactoe");
+        } catch (IOException e) {
+            System.out.println("Error al guardar la partida: " + e.getMessage());
+        }
+        System.out.println("Partida guardada en tictactoe");
+
 
         // Cargar partida
-        TicTacToeState loadedState = GameStorage.loadGame("tictactoe");
+        TicTacToeState loadedState=null;
+        try{
+            loadedState= GameStorage.loadGame("tictactoe");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error al cargar la partida: " + e.getMessage());
+        }
+
         System.out.println("Estado cargado:");
         System.out.println(loadedState);
+        System.out.println("Partida cargada desde tictactoe");
     }
 }
