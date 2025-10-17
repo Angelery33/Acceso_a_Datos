@@ -1,4 +1,4 @@
-package com.angelcantero.tema01.boletin01.ejercicio7;
+package com.angelcantero.tema01.boletin02.ejercicio7;
 
 
 import java.io.BufferedReader;

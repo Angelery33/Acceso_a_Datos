@@ -1,4 +1,4 @@
-package com.angelcantero.tema01.boletin01.ejercicio6;
+package com.angelcantero.tema01.boletin02.ejercicio6;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,6 +13,7 @@ import java.io.File;
 public class CalculadoraPrimo {
 
     private static final String FILENAME = "primos.txt"; // Nombre del archivo para almacenar los primos
+    /*private static final String RUTA= CalculadoraPrimo.class.getResource("primos.txt");*/
 
     /**
      * Determina el número desde el cual el programa debe empezar a buscar primos.

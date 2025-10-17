@@ -1,4 +1,4 @@
-package com.angelcantero.tema01.boletin01.ejercicio4;
+package com.angelcantero.tema01.boletin02.ejercicio4;
 
 
 

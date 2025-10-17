@@ -1,8 +1,8 @@
-package com.angelcantero.tema01.boletin01.ejercicio6;
+package com.angelcantero.tema01.boletin02.ejercicio6;
 
 import java.io.IOException;
 
-import static com.angelcantero.tema01.boletin01.ejercicio6.CalculadoraPrimo.*;
+import static com.angelcantero.tema01.boletin02.ejercicio6.CalculadoraPrimo.*;
 
 
 

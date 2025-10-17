@@ -1,4 +1,4 @@
-package com.angelcantero.tema01.boletin01;
+package com.angelcantero.tema01.boletin02;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
