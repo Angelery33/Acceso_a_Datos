@@ -1,7 +1,5 @@
 package com.angelcantero.tema01.boletin03;
 
-import java.util.List;
-
 /*
  * Representa un inventario de productos en un almacén.
  */
@@ -12,6 +10,7 @@ public class Inventario {
 
     public Inventario() {
     }
+
     /*
      * Constructor con todos los parámetros.
      */
@@ -47,10 +46,6 @@ public class Inventario {
 
     @Override
     public String toString() {
-        return "Inventario{" +
-                "almacen='" + almacen + '\'' +
-                ", actualizado='" + actualizado + '\'' +
-                ", productos=" + productos +
-                '}';
+        return "Inventario{" + "almacen='" + almacen + '\'' + ", actualizado='" + actualizado + '\'' + ", productos=" + productos + '}';
     }
 }

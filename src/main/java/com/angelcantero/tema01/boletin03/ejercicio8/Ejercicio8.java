@@ -1,6 +1,9 @@
 package com.angelcantero.tema01.boletin03.ejercicio8;
 
-import com.angelcantero.tema01.boletin03.*;
+import com.angelcantero.tema01.boletin03.GenericParser;
+import com.angelcantero.tema01.boletin03.Genero;
+import com.angelcantero.tema01.boletin03.Pelicula;
+import com.angelcantero.tema01.boletin03.Videoteca;
 
 import java.util.*;
 
@@ -28,31 +31,30 @@ public class Ejercicio8 {
         Collections.sort(generosOrdenados);
         return generosOrdenados;
     }
-        /*
-         * Este metodo ordena en base a la nota media una lista de peliculas y devuelve una lista de peliculas ya
-         * ordenada
-         * @param un objeto Videoteca
-         * @return una lista de peliculas ya ordenada
-         */
-        public static Pelicula[] calcularMedia(Videoteca videoteca) {
-            Pelicula[] peliculas = videoteca.getPeliculas();
-            Pelicula[] peliculasOrdenadas = new Pelicula[peliculas.length];
-            for (int i = 0; i < peliculas.length; i++) {
-                peliculasOrdenadas[i] = peliculas[i];
-            }
-            ;
-            for (int i = 0; i < peliculasOrdenadas.length - 1; i++) {
-                for (int j = i + 1; j < peliculasOrdenadas.length; j++) {
-                    if (peliculasOrdenadas[j].getNotaMedia() > peliculasOrdenadas[i].getNotaMedia()) {
-                        // Intercambiamos las posiciones
-                        Pelicula temp = peliculasOrdenadas[i];
-                        peliculasOrdenadas[i] = peliculasOrdenadas[j];
-                        peliculasOrdenadas[j] = temp;
-                    }
+
+    /*
+     * Este metodo ordena en base a la nota media una lista de peliculas y devuelve una lista de peliculas ya
+     * ordenada
+     * @param un objeto Videoteca
+     * @return una lista de peliculas ya ordenada
+     */
+    public static Pelicula[] calcularMedia(Videoteca videoteca) {
+        Pelicula[] peliculas = videoteca.getPeliculas();
+        Pelicula[] peliculasOrdenadas = new Pelicula[peliculas.length];
+        System.arraycopy(peliculas, 0, peliculasOrdenadas, 0, peliculas.length);
+        for (int i = 0; i < peliculasOrdenadas.length - 1; i++) {
+            for (int j = i + 1; j < peliculasOrdenadas.length; j++) {
+                if (peliculasOrdenadas[j].getNotaMedia() > peliculasOrdenadas[i].getNotaMedia()) {
+                    // Intercambiamos las posiciones
+                    Pelicula temp = peliculasOrdenadas[i];
+                    peliculasOrdenadas[i] = peliculasOrdenadas[j];
+                    peliculasOrdenadas[j] = temp;
                 }
             }
-            return peliculasOrdenadas;
         }
+        return peliculasOrdenadas;
+    }
+
     public static void main(String[] args) {
         Scanner lector = new Scanner(System.in);
         GenericParser parser = new GenericParser();
@@ -65,11 +67,11 @@ public class Ejercicio8 {
         }
 
         System.out.println("\nPeliculas de la Videoteca:\n");
-        for (Pelicula pelicula : videoteca.getPeliculas()){
+        for (Pelicula pelicula : videoteca.getPeliculas()) {
             System.out.println(pelicula);
-    }
+        }
         Pelicula[] pelOrd;
-        pelOrd=calcularMedia(videoteca);
+        pelOrd = calcularMedia(videoteca);
         for (Pelicula pelicula : pelOrd) {
             System.out.println(pelicula);
         }

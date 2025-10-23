@@ -1,6 +1,5 @@
 package com.angelcantero.tema01.boletin03;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Videoteca {
@@ -36,8 +35,6 @@ public class Videoteca {
 
     @Override
     public String toString() {
-        return "Videoteca{" +
-               "peliculas=" + peliculas +
-               '}';
+        return "Videoteca{" + "peliculas=" + peliculas + '}';
     }
 }

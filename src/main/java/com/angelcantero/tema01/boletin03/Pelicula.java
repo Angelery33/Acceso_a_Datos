@@ -1,6 +1,5 @@
 package com.angelcantero.tema01.boletin03;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Pelicula {
@@ -16,8 +15,7 @@ public class Pelicula {
     public Pelicula() {
     }
 
-    public Pelicula(String id, String titulo, String director, int estreno, int duracionMin, Genero[] generos,
-                    Puntuaciones puntuaciones) {
+    public Pelicula(String id, String titulo, String director, int estreno, int duracionMin, Genero[] generos, Puntuaciones puntuaciones) {
         this.id = id;
         this.titulo = titulo;
         this.director = director;
@@ -25,7 +23,7 @@ public class Pelicula {
         this.duracionMin = duracionMin;
         this.generos = generos;
         this.puntuaciones = puntuaciones;
-        this.notaMedia=calcularMedia();
+        this.notaMedia = calcularMedia();
     }
 
     public String getId() {
@@ -94,8 +92,8 @@ public class Pelicula {
 
     public double calcularMedia() {
 
-            Puntuaciones punt = this.getPuntuaciones();
-            return ((punt.getImdb() / 10) + punt.getRt()) / 2;
+        Puntuaciones punt = this.getPuntuaciones();
+        return ((punt.getImdb() / 10) + punt.getRt()) / 2;
 
 
     }
@@ -115,15 +113,6 @@ public class Pelicula {
 
     @Override
     public String toString() {
-        return "Pelicula{" +
-               "id='" + id  +
-               ", titulo='" + titulo +
-               ", director='" + director +
-               ", estreno=" + estreno +
-               ", duracionMin=" + duracionMin +
-               ", generos=" + generos +
-               ", puntuaciones=" + puntuaciones +
-                ", puntuación media ="+notaMedia+
-               '}';
+        return "Pelicula{" + "id='" + id + ", titulo='" + titulo + ", director='" + director + ", estreno=" + estreno + ", duracionMin=" + duracionMin + ", generos=" + generos + ", puntuaciones=" + puntuaciones + ", puntuación media =" + notaMedia + '}';
     }
 }
