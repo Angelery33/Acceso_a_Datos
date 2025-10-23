@@ -31,7 +31,6 @@ public class Ejercicio2 {
 
     }
     /**
-     * Este método completa la lógica que empezaste.
      * Recibe el array de empleados, calcula las estadísticas
      * y las muestra por pantalla.
      *

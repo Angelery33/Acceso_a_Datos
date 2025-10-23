@@ -22,7 +22,7 @@ public class Ejercicio7 {
 
             System.out.println("Id del producto : "+producto.getId());
             }
-                System.out.println("Elige el id del producto para saber u ubicación");
+                System.out.println("Elige el id del producto para saber su ubicación");
                 String id = lector.nextLine();
                 for (Producto producto : productosInventario) {
                     if (producto.getId().equals(id)){

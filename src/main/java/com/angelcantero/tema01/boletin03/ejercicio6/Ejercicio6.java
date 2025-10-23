@@ -21,7 +21,7 @@ public class Ejercicio6 {
                 notas[i] = alumno.getNotas()[i].getNota();
             }
 
-            System.out.println("Alumno:");
+            System.out.println();
             System.out.println("Nombre del alumno :"+alumno.getNombre());
             System.out.println("Nota mas alta : "+ EstadisiticasGenerales.maxNumber(notas));
         }

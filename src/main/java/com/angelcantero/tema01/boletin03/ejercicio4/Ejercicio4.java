@@ -36,6 +36,12 @@ public class Ejercicio4 {
 
             }
         }
+        /*
+         *   Este metodo calcula el precio total del pedido.
+         *
+         * @param un objeto Pedido
+         */
+
         public static Double calcularTotal(Pedido pedido){
             double[] precios = new double[pedido.getItems().length];
             for (int i = 0; i < pedido.getItems().length; i++) {

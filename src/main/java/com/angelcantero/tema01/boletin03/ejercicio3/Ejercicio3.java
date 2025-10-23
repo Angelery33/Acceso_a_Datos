@@ -31,6 +31,12 @@ public class Ejercicio3 {
 
 
 }
+
+    /*
+     * Recibe el array de libros, calcula las estadísticas
+     * y las muestra por pantalla.
+     * @param libros El array de libros parseado del XML.
+     */
     public static void calcularYMostrarEstadisticas(Libro[] libros) {
 
         HashMap<String, StatsGenero> statsLibrosGen = new HashMap<>();
