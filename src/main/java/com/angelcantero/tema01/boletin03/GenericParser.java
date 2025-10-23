@@ -18,9 +18,23 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Clase de utilidad para analizar (parsear) archivos XML y JSON y convertirlos en objetos Java.
+ * Proporciona métodos estáticos para manejar diferentes tipos de archivos de datos.
+ */
 public class GenericParser {
 
+    /**
+     * Analiza el archivo `empleados.xml` y lo convierte en un array de objetos {@link Empleado}.
+     *
+     * @return Un array de {@link Empleado} que contiene los datos de los empleados parseados.
+     * @throws IOException Si ocurre un error de entrada/salida durante la lectura del archivo.
+     * @throws ParserConfigurationException Si se detecta un error de configuración grave en el parser XML.
+     * @throws SAXException Si se produce un error durante el análisis del documento XML.
+     */
     public static Empleado[] parseEmpleados() throws IOException, ParserConfigurationException, SAXException {
         Empleado[] empleados = null;
 
@@ -53,6 +67,14 @@ public class GenericParser {
         return empleados;
     }
 
+    /**
+     * Analiza el archivo `biblioteca.xml` y lo convierte en un array de objetos {@link Libro}.
+     *
+     * @return Un array de {@link Libro} que contiene los datos de los libros parseados.
+     * @throws IOException Si ocurre un error de entrada/salida durante la lectura del archivo.
+     * @throws ParserConfigurationException Si se detecta un error de configuración grave en el parser XML.
+     * @throws SAXException Si se produce un error durante el análisis del documento XML.
+     */
     public static Libro[] parseLibro() throws IOException, ParserConfigurationException, SAXException {
         Libro[] libros = null;
 
@@ -132,6 +154,14 @@ public class GenericParser {
         return libros;
     }
 
+    /**
+     * Analiza el archivo `pedidos.xml` y lo convierte en un array de objetos {@link Pedido}.
+     *
+     * @return Un array de {@link Pedido} que contiene los datos de los pedidos parseados.
+     * @throws IOException Si ocurre un error de entrada/salida durante la lectura del archivo.
+     * @throws ParserConfigurationException Si se detecta un error de configuración grave en el parser XML.
+     * @throws SAXException Si se produce un error durante el análisis del documento XML.
+     */
     public static Pedido[] parsePedidos() throws IOException, ParserConfigurationException, SAXException {
         Pedido[] pedidos = null;
         try (InputStream fis = GenericParser.class.getResourceAsStream("/pedidos.xml")) {
@@ -159,20 +189,19 @@ public class GenericParser {
                     String fechaDeNacimiento = clie.getElementsByTagName("email").item(0).getTextContent();
                     cliente = new Cliente(nombre, fechaDeNacimiento);
                 }
-                // 1. Coge el nodo contenedor <items>
+
                 NodeList itemsContainerList = item.getElementsByTagName("items");
 
                 if (itemsContainerList.getLength() > 0) {
-                    // 2. Coge el elemento <items> (el .item(0) de la lista contenedora)
+
                     Element itemsContainer = (Element) itemsContainerList.item(0);
 
-                    // 3. Coge la lista de hijos <item> (singular)
+
                     NodeList itemsList = itemsContainer.getElementsByTagName("item");
 
-                    // 4. Inicializa el array con el tamaño correcto
+
                     items = new ItemPedido[itemsList.getLength()];
 
-                    // 5. Recorre la lista de <item> (singular)
                     for (int j = 0; j < itemsList.getLength(); j++) {
 
                         Element itemIndividual = (Element) itemsList.item(j);
@@ -203,10 +232,18 @@ public class GenericParser {
         }
         return pedidos;
     }
+
+    /**
+     * Analiza el archivo `alumnos.json` y lo convierte en un array de objetos {@link Alumno}.
+     *
+     * @return Un array de {@link Alumno} que contiene los datos de los alumnos parseados.
+     * @throws IOException Si ocurre un error de entrada/salida durante la lectura del archivo.
+     */
     public Alumno[] parseAlumnos() throws IOException {
         Alumno[] alumnos = null;
         Nota[] notas = null;
-                StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
+
         try (InputStream is = getClass().getResourceAsStream("/alumnos.json");
              BufferedReader br = new BufferedReader(new InputStreamReader(is,
                      StandardCharsets.UTF_8))) {
@@ -237,4 +274,103 @@ public class GenericParser {
         return alumnos;
     }
 
+    /**
+     * Analiza el archivo `inventario.json` y lo convierte en un objeto {@link Inventario}.
+     *
+     * @return Un objeto {@link Inventario} que contiene los datos del inventario parseado.
+     * @throws IOException Si ocurre un error de entrada/salida durante la lectura del archivo.
+     */
+    public Inventario parseInventario() throws IOException{
+        Inventario inventario = null;
+        StringBuilder sb = new StringBuilder();
+        try (InputStream is = getClass().getResourceAsStream("/inventario.json");
+             BufferedReader br = new BufferedReader(new InputStreamReader(is,
+                     StandardCharsets.UTF_8))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
+            JSONTokener tokener = new JSONTokener(sb.toString());
+            JSONObject jsonObject = new JSONObject(tokener);
+
+            String almacen = jsonObject.getString("almacen");
+            String actualizado = jsonObject.getString("actualizado");
+            JSONArray listaProductos=jsonObject.getJSONArray("productos");
+            Producto[] productos=new Producto[listaProductos.length()];
+            for (int i = 0; i < listaProductos.length(); i++) {
+                JSONObject jsonObject1 = listaProductos.getJSONObject(i);
+                String id = jsonObject1.getString("id");
+                String nombre= jsonObject1.getString("nombre");
+                int stock=jsonObject1.getInt("stock");
+                double precio=jsonObject1.getDouble("precio");
+                JSONArray listaTags=jsonObject1.getJSONArray("tags");
+                List<String> tags = new ArrayList<>();
+                for (int j = 0; j < listaTags.length(); j++) {
+                    tags.add(listaTags.getString(j));
+
+                }
+                JSONObject ubi = jsonObject1.getJSONObject("ubicacion");
+                int pasillo = ubi.getInt("pasillo");
+                String estante = ubi.getString("estante");
+                Ubicacion ubicacion=new Ubicacion(pasillo,estante);
+                productos[i]=new Producto(id,nombre,stock,precio,tags,ubicacion);
+                inventario=new Inventario(almacen,actualizado,productos);
+
+            }
+
+
+
+        }
+        return inventario;
+    }
+
+    /**
+     * Analiza el archivo `peliculas.json` y lo convierte en un objeto {@link Videoteca}.
+     *
+     * @return Un objeto {@link Videoteca} que contiene la colección de películas parseadas.
+     * @throws IOException Si ocurre un error de entrada/salida durante la lectura del archivo.
+     */
+    public Videoteca parseVideoteca() throws IOException {
+        Videoteca videoteca = null;
+        StringBuilder sb = new StringBuilder();
+        try (InputStream is = getClass().getResourceAsStream("/peliculas.json");
+             BufferedReader br = new BufferedReader(new InputStreamReader(is,
+                     StandardCharsets.UTF_8))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
+            JSONTokener tokener = new JSONTokener(sb.toString());
+            JSONObject jsonObject = new JSONObject(tokener);
+
+            JSONArray peliculasArrayJson = jsonObject.getJSONArray("peliculas");
+            Pelicula[] peliculas = new Pelicula[peliculasArrayJson.length()];
+
+            for (int i = 0; i < peliculasArrayJson.length(); i++) {
+                JSONObject peliculaJson = peliculasArrayJson.getJSONObject(i);
+
+                String id = peliculaJson.getString("id");
+                String titulo = peliculaJson.getString("titulo");
+                String director = peliculaJson.getString("director");
+                int estreno = peliculaJson.getInt("estreno");
+                int duracionMin = peliculaJson.getInt("duracionMin");
+
+                JSONArray generosArrayJson = peliculaJson.getJSONArray("generos");
+                Genero[] generos = new Genero[generosArrayJson.length()];
+                for (int j = 0; j < generosArrayJson.length(); j++) {
+                    String ngenero = generosArrayJson.getString(j);
+                    generos[j] = new Genero(ngenero);
+                }
+
+                JSONObject puntuacionesJson = peliculaJson.getJSONObject("puntuaciones");
+                double imdb = puntuacionesJson.getDouble("imdb");
+                int rt = puntuacionesJson.getInt("rt");
+                Puntuaciones puntuaciones = new Puntuaciones(imdb, rt);
+
+                peliculas[i]=new Pelicula(id, titulo, director, estreno, duracionMin, generos, puntuaciones);
+            }
+            videoteca = new Videoteca(peliculas);
+        }
+        return videoteca;
+    }
 }
