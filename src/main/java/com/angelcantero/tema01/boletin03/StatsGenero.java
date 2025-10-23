@@ -1,5 +1,9 @@
 package com.angelcantero.tema01.boletin03;
 
+/**
+ * Clase auxiliar para guardar la suma total de salarios
+ * y el número de empleados de un departamento.
+ */
 public class StatsGenero {
     private int contadorDeLibros;
 
