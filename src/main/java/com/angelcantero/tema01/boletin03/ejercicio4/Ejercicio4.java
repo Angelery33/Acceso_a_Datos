@@ -22,14 +22,15 @@ public class Ejercicio4 {
 
 
             }
-            /*System.out.println("Indica el pedido a buscar:");
+            System.out.println("Indica el pedido a buscar:");
             String id = lector.nextLine();
             for (Pedido pedido : pedidos) {
                 if (pedido.getId().equals(id)){
                 System.out.println(pedido.mostrarItems());
 
                 }
-            }*/
+            }
+            
             for (Pedido pedido : pedidos) {
                         System.out.println(pedido);
                         System.out.println(calcularTotal(pedido));
